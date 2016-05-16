@@ -1,0 +1,2 @@
+This is a sample Code for One of my project for weather prediction on corps Data
+So to get data to do analysis we wrote this script to Download 10 years of weather data, in monthly form using API and then convert daily summary from json to Table format to visualize the weather change patterns.
