@@ -1,0 +1,23 @@
+
+
+ source('decisiontree.R')
+ n <- getclassifier(treedata)
+ 
+ # here n is list n[[1]] having data, n[[2]] index and n[[3]] is name of column for which data to classify
+ 
+otherdata <- getotherattributes(treedata,n[[2]])
+splitteddata <- splitdataset(n[[1]],otherdata)
+maxinfogain(splitteddata,n[[1]])
+
+
+> treedata <- readdata('treedata1.csv')
+> n <- getclassifier(treedata)
+> splitteddata <- splitdataset(n[[1]],otherdata)
+> attrentropy(splitteddata[[2]],n[[1]])
+
+index <- which(names(test) == "Play.ball")
+test <- subset(treedata, treedata[[1]] == "Sunny", -1) 
+n1 <- test[[4]]
+otherdata1 <- getotherattributes(test,index)
+
+builddecisiontree('treedata1.csv')
