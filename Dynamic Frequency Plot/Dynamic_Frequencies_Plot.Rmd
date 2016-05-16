@@ -1,0 +1,47 @@
+---
+title: "Frequency"
+author: "Aafaque"
+date: "Thursday, January 29, 2015"
+output: html_document
+runtime: shiny
+---
+```{r}
+  library(ggplot2)
+  fbdata = read.table("Dynamic_Frequencies_Input.tsv",header=TRUE,sep='\t')
+  xout <- table(fbdata$dob_day)
+  xout
+```
+
+Frequency of Different attributes of facebook shown / Gender Wise
+
+## Inputs and Outputs
+
+User can Select Input to check Frequency against different attributes
+
+Select BinWidth and Opacity of the Graph
+
+Scale break of X-axis can also be selected like scale by 1 unit or 10 units visible.
+
+Note: ggplot2 Package required
+
+```{r, echo=FALSE}
+inputPanel(
+  selectInput("x_input", label = "Frequency Input",
+              choices = names(fbdata), selected = "dob_day"),
+  
+  sliderInput("binw", label = "BinWidth",
+              min = 0, max = 30, value = 1, step = 0.1),
+  
+  sliderInput("alpha", label = "Opacity of Bars in Histogram",
+              min = 0, max = 1, value = 1, step = 0.1),
+  
+  sliderInput("xadjust", label = "X Scale Break Value",
+              min = 0, max = 10, value = 1, step = 0.1)
+)
+
+renderPlot({
+  summary(fbdata$dob_day)
+  ggplot(fbdata, aes_string(x = (input$x_input), color="gender")) + geom_histogram(binwidth= input$binw, alpha= input$alpha) + scale_x_continuous(breaks = seq(from = 0, to = 10000, by = input$xadjust))
+
+} , height = 1024 , width = 1024)
+```
