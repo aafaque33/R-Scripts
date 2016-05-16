@@ -1,3 +1,8 @@
+#------------------------------------------------------
+# Author Aafaque Aafaque
+# email: aafaqueabdullah@yahoo.com
+#------------------------------------------------------
+
 ---
 title: "Frequency"
 author: "Aafaque"
