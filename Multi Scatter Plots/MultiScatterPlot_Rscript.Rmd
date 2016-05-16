@@ -1,0 +1,49 @@
+---
+title: "Multi Scatter Plots"
+author: "Aafaque"
+date: "Thursday, January 29, 2015"
+output: html_document
+runtime: shiny
+---
+```{r}
+  library(ggplot2)
+  diamonds = read.table("MultiScatterPlot_TestDataset.csv",header=TRUE,sep=',')
+```
+
+Pricing the C's of Diamond Stones
+
+## Inputs and Outputs
+
+In this we need to select x-y axis attributes to see reults, based on the third attrbibute (facet) , and also attribute can be selected to color out values scatter plot points , 
+
+Number of Columns can be selected by user too
+
+Scale break of X-axis can also be selected like scale by 1 unit or 10 units visible.
+Note: ggplot2 Package required
+
+```{r, echo=FALSE}
+inputPanel(
+  selectInput("x_input", label = "X-axis Input",
+              choices = names(diamonds), selected = "carat"),
+  
+  selectInput("y_input", label = "Y-axis Input",
+              choices = names(diamonds), selected = "price"),
+  
+  selectInput("facet", label = "Facetting Attribute",
+              choices = names(diamonds), selected = "cut"),
+  
+  selectInput("color", label = "Color Attribute",
+              choices = names(diamonds), selected = "cut"),
+  
+  sliderInput("xadjust", label = "X Scale Break Value",
+              min = 0, max = 10, value = 1, step = 0.1),
+  
+  sliderInput("col", label = "Columns to Show",
+              min = 1, max = 10, value = 1, step = 1)
+)
+
+renderPlot({
+  ggplot(data = diamonds, aes_string(x = (input$x_input), y = (input$y_input)  ,color = (input$color) )) + geom_point() + facet_wrap((input$facet),ncol = input$col) + scale_x_continuous(breaks = seq(from = 0, to = 10000, by = input$xadjust))
+
+} , height = 1024 , width = 1024)
+```
