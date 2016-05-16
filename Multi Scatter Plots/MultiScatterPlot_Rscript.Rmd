@@ -1,3 +1,8 @@
+#---------------------------------------------------
+# Developer: Aafaque Aafaque
+# Email: aafaqueabdullah@yahoo.com
+#---------------------------------------------------
+
 ---
 title: "Multi Scatter Plots"
 author: "Aafaque"
