@@ -1,0 +1,9 @@
+source('kmeans.R')
+clustersize  <- 3
+clusterdata <- readclusterdata('kmeansdata1.csv')
+S <- choosevectors(clusterdata,clustersize)
+rows <- calculatecluster(clusterdata,S)
+test <- getnewcentroid(clusterdata,rows,clustersize)
+finalclusters <- getfinalclusters(clusterdata,test,S,clustersize)
+
+createclusters('kmeansdata1.csv',clustersize)
